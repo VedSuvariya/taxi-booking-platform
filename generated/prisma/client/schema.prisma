@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma/client"
+}
+
+datasource db {
+  provider     = "postgresql"
+  relationMode = "prisma"
+}
+
+model Booking {
+  id            Int      @id @default(autoincrement())
+  tripType      String
+  pickupPlace   String
+  dropPlace     String
+  date          String
+  time          String
+  customerName  String
+  customerPhone String
+  status        String   @default("PENDING")
+  createdAt     DateTime @default(now())
+}
