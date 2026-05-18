@@ -1,46 +1,45 @@
-'use client';
 
-import Link from 'next/link';
-import { CheckCircle, PhoneCall } from 'lucide-react';
+import BookingForm from '@/components/BookingForm';
 
-export default function ConfirmationPage() {
+export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0a369d] flex flex-col items-center justify-center p-4 text-white">
-      <div className="max-w-md w-full bg-white text-gray-800 rounded-[32px] p-8 text-center shadow-2xl space-y-6">
-        
-        <div className="flex justify-center">
-          <CheckCircle className="text-green-500 w-16 h-16 animate-bounce" />
-        </div>
+    <main className="min-h-screen flex flex-col" style={{ background: '#F5F0E6' }}>
 
-        <div className="space-y-2">
-          <h1 className="text-2xl font-bold text-gray-900">Booking Request Received!</h1>
-          <p className="text-sm text-gray-500 font-medium px-2">
-            Your ride itinerary details have been successfully transmitted directly to our admin team.
-          </p>
+      {/* Header */}
+      <header className="w-full px-6 py-4 flex items-center justify-between" style={{ borderBottom: '1px solid #e0d8c8' }}>
+        <div className="flex items-center gap-3">
+          <img src="/logo.png" alt="SkyCru Cab Services" className="h-10 w-auto" />
         </div>
+        <a href="tel:9825841712" className="flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-xl" style={{ background: '#E8961E', color: '#fff' }}>
+          📞 9825841712
+        </a>
+      </header>
 
-        <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4 flex items-center gap-4 text-left">
-          <div className="bg-blue-500 text-white p-2.5 rounded-xl shrink-0">
-            <PhoneCall size={20} />
-          </div>
-          <div>
-            <h4 className="font-bold text-blue-900 text-sm">What happens next?</h4>
-            <p className="text-xs text-blue-700 mt-0.5 leading-relaxed">
-              Our manual operations desk will review the route details and call your mobile number directly within 5 minutes to issue a quote and finalize the booking.
-            </p>
-          </div>
+      {/* Hero */}
+      <section className="flex flex-col items-center justify-center flex-1 px-4 py-10">
+        <h1 className="text-3xl font-bold text-center mb-1" style={{ color: '#1B3A4B' }}>
+          Book Your Reliable Ride
+        </h1>
+        <p className="text-sm text-center mb-8" style={{ color: '#5a7a8a' }}>
+          Safe, comfortable cab services across Gujarat
+        </p>
+        <div className="w-full max-w-md">
+          <BookingForm />
         </div>
+      </section>
 
-        <div className="pt-2">
-          <Link 
-            href="/"
-            className="block w-full bg-[#1d52ca] hover:bg-blue-800 text-white font-bold py-3.5 px-4 rounded-xl transition text-center shadow-md shadow-blue-100"
-          >
-            Book Another Ride
-          </Link>
-        </div>
+      {/* Footer */}
+      <footer className="w-full px-6 py-6 text-center" style={{ borderTop: '1px solid #e0d8c8' }}>
+        <p className="text-sm font-semibold mb-1" style={{ color: '#1B3A4B' }}>SkyCru Cab Services</p>
+        <p className="text-xs mb-2" style={{ color: '#7a8a90' }}>
+          Umeshbhai Khachar &nbsp;|&nbsp; Gautambhai Kalkan
+        </p>
+        <a href="tel:9825841712" className="text-sm font-bold" style={{ color: '#E8961E' }}>
+          📞 9825841712
+        </a>
+        <p className="text-xs mt-3" style={{ color: '#aaa' }}>© 2025 SkyCru Cab Services. All rights reserved.</p>
+      </footer>
 
-      </div>
     </main>
   );
 }
