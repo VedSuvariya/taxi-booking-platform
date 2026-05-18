@@ -1,76 +1,143 @@
 'use client';
 
-import Link from 'next/link';
-import { CheckCircle, PhoneCall } from 'lucide-react';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-export default function ConfirmationPage() {
+interface BookingData {
+  tripType: string;
+  pickupPlace: string;
+  dropPlace: string;
+  date: string;
+  time: string;
+  customerName: string;
+  customerPhone: string;
+}
+
+const initialState: BookingData = {
+  tripType: 'ONE_WAY',
+  pickupPlace: '',
+  dropPlace: '',
+  date: '',
+  time: '',
+  customerName: '',
+  customerPhone: '',
+};
+
+export default function BookingForm() {
+  const [formData, setFormData] = useState<BookingData>(initialState);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const router = useRouter();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    try {
+      const res = await fetch('/api/book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.detail || data.error || 'Something went wrong');
+
+      router.push('/confirmation');
+
+    } catch (err: any) {
+      setError(err.message || 'Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const inputStyle = {
+    width: '100%',
+    border: '1px solid #d0c8b8',
+    borderRadius: '12px',
+    padding: '10px 14px',
+    background: '#fff',
+    color: '#1B3A4B',
+    fontSize: '14px',
+    outline: 'none',
+  };
+
+  const labelStyle = {
+    display: 'block',
+    fontSize: '13px',
+    fontWeight: '600' as const,
+    marginBottom: '6px',
+    color: '#1B3A4B',
+  };
+
   return (
-    <main className="min-h-screen flex flex-col" style={{ background: '#F5F0E6' }}>
+    <div className="rounded-3xl p-6 space-y-4" style={{ background: '#fff', border: '1px solid #e0d8c8' }}>
 
-      {/* Header */}
-      <header className="w-full px-6 py-4 flex items-center justify-between" style={{ borderBottom: '1px solid #e0d8c8' }}>
-        <div className="flex items-center gap-3">
-          <img src="/logo.png" alt="SkyCru Cab Services" className="h-10 w-auto" />
+      {error && (
+        <div className="p-3 rounded-xl text-sm" style={{ background: '#FFF0F0', color: '#c0392b', border: '1px solid #f5c0c0' }}>
+          ❌ {error}
         </div>
-        <a href="tel:9825841712" className="flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-xl" style={{ background: '#E8961E', color: '#fff' }}>
-          📞 9825841712
-        </a>
-      </header>
+      )}
 
-      {/* Confirmation Card */}
-      <section className="flex-1 flex items-center justify-center p-4">
-        <div className="max-w-md w-full rounded-3xl p-8 text-center space-y-6" style={{ background: '#fff', border: '1px solid #e0d8c8' }}>
+      <form onSubmit={handleSubmit} className="space-y-4">
 
-          <div className="flex justify-center">
-            <CheckCircle className="w-16 h-16 animate-bounce" style={{ color: '#2D9E75' }} />
-          </div>
-
-          <div className="space-y-2">
-            <h1 className="text-2xl font-bold" style={{ color: '#1B3A4B' }}>
-              Booking Request Received!
-            </h1>
-            <p className="text-sm px-2" style={{ color: '#7a8a90' }}>
-              Your ride details have been sent to our team at SkyCru Cab Services.
-            </p>
-          </div>
-
-          <div className="rounded-2xl p-4 flex items-center gap-4 text-left" style={{ background: '#FFF8ED', border: '1px solid #f5d9a0' }}>
-            <div className="p-2.5 rounded-xl shrink-0" style={{ background: '#E8961E' }}>
-              <PhoneCall size={20} color="#fff" />
-            </div>
-            <div>
-              <h4 className="font-bold text-sm" style={{ color: '#7a4a00' }}>What happens next?</h4>
-              <p className="text-xs mt-0.5 leading-relaxed" style={{ color: '#a06010' }}>
-                Our team will review your route and call you within 5 minutes to confirm the booking and provide a quote.
-              </p>
-            </div>
-          </div>
-
-          {/* Contact info */}
-          <div className="rounded-2xl p-4 text-sm space-y-1" style={{ background: '#F0EAD8', border: '1px solid #e0d8c8' }}>
-            <p className="font-semibold" style={{ color: '#1B3A4B' }}>SkyCru Cab Services</p>
-            <p style={{ color: '#5a7a8a' }}>Umeshbhai Khachar &nbsp;|&nbsp; Gautambhai Kalkan</p>
-            <a href="tel:9825841712" className="font-bold block" style={{ color: '#E8961E' }}>
-              📞 9825841712
-            </a>
-          </div>
-
-          <Link
-            href="/"
-            className="block w-full font-bold py-3.5 px-4 rounded-xl text-center text-white transition"
-            style={{ background: '#1B3A4B' }}
-          >
-            Book Another Ride
-          </Link>
-
+        <div>
+          <label style={labelStyle}>Trip Type</label>
+          <select name="tripType" value={formData.tripType} onChange={handleChange} style={inputStyle}>
+            <option value="ONE_WAY">One Way</option>
+            <option value="ROUND_TRIP">Round Trip</option>
+            <option value="LOCAL">Local</option>
+          </select>
         </div>
-      </section>
 
-      {/* Footer */}
-      <footer className="w-full px-6 py-5 text-center" style={{ borderTop: '1px solid #e0d8c8' }}>
-        <p className="text-xs" style={{ color: '#aaa' }}>© 2025 SkyCru Cab Services. All rights reserved.</p>
-      </footer>
+        <div>
+          <label style={labelStyle}>Pickup Location</label>
+          <input type="text" name="pickupPlace" placeholder="Enter pickup city or address" value={formData.pickupPlace} onChange={handleChange} required style={inputStyle} />
+        </div>
 
-    </main>
+        <div>
+          <label style={labelStyle}>Drop Location</label>
+          <input type="text" name="dropPlace" placeholder="Enter drop city or address" value={formData.dropPlace} onChange={handleChange} required style={inputStyle} />
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label style={labelStyle}>Date</label>
+            <input type="date" name="date" value={formData.date} onChange={handleChange} required style={inputStyle} />
+          </div>
+          <div>
+            <label style={labelStyle}>Time</label>
+            <input type="time" name="time" value={formData.time} onChange={handleChange} required style={inputStyle} />
+          </div>
+        </div>
+
+        <div>
+          <label style={labelStyle}>Your Name</label>
+          <input type="text" name="customerName" placeholder="Full name" value={formData.customerName} onChange={handleChange} required style={inputStyle} />
+        </div>
+
+        <div>
+          <label style={labelStyle}>Phone Number</label>
+          <input type="tel" name="customerPhone" placeholder="+91 98765 43210" value={formData.customerPhone} onChange={handleChange} required style={inputStyle} />
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full font-bold py-3.5 rounded-xl text-white transition"
+          style={{ background: loading ? '#a0b0c0' : '#1B3A4B' }}
+        >
+          {loading ? 'Confirming...' : '🚖 Confirm Booking'}
+        </button>
+
+      </form>
+    </div>
   );
 }
