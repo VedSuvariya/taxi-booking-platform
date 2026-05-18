@@ -1,8 +1,10 @@
-import { PrismaClient } from '@prisma/client';
+import Prisma from '@prisma/client';
 import { PrismaNeon } from '@prisma/adapter-neon';
 
+const { PrismaClient } = Prisma;
+
 const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined;
+  prisma: InstanceType<typeof PrismaClient> | undefined;
 };
 
 function createPrismaClient() {
