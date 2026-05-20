@@ -889,6 +889,7 @@ export namespace Prisma {
   export type BookingMinAggregateOutputType = {
     id: number | null
     tripType: string | null
+    carType: string | null
     pickupPlace: string | null
     dropPlace: string | null
     date: string | null
@@ -902,6 +903,7 @@ export namespace Prisma {
   export type BookingMaxAggregateOutputType = {
     id: number | null
     tripType: string | null
+    carType: string | null
     pickupPlace: string | null
     dropPlace: string | null
     date: string | null
@@ -915,6 +917,7 @@ export namespace Prisma {
   export type BookingCountAggregateOutputType = {
     id: number
     tripType: number
+    carType: number
     pickupPlace: number
     dropPlace: number
     date: number
@@ -938,6 +941,7 @@ export namespace Prisma {
   export type BookingMinAggregateInputType = {
     id?: true
     tripType?: true
+    carType?: true
     pickupPlace?: true
     dropPlace?: true
     date?: true
@@ -951,6 +955,7 @@ export namespace Prisma {
   export type BookingMaxAggregateInputType = {
     id?: true
     tripType?: true
+    carType?: true
     pickupPlace?: true
     dropPlace?: true
     date?: true
@@ -964,6 +969,7 @@ export namespace Prisma {
   export type BookingCountAggregateInputType = {
     id?: true
     tripType?: true
+    carType?: true
     pickupPlace?: true
     dropPlace?: true
     date?: true
@@ -1064,6 +1070,7 @@ export namespace Prisma {
   export type BookingGroupByOutputType = {
     id: number
     tripType: string
+    carType: string
     pickupPlace: string
     dropPlace: string
     date: string
@@ -1096,6 +1103,7 @@ export namespace Prisma {
   export type BookingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     tripType?: boolean
+    carType?: boolean
     pickupPlace?: boolean
     dropPlace?: boolean
     date?: boolean
@@ -1109,6 +1117,7 @@ export namespace Prisma {
   export type BookingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     tripType?: boolean
+    carType?: boolean
     pickupPlace?: boolean
     dropPlace?: boolean
     date?: boolean
@@ -1122,6 +1131,7 @@ export namespace Prisma {
   export type BookingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     tripType?: boolean
+    carType?: boolean
     pickupPlace?: boolean
     dropPlace?: boolean
     date?: boolean
@@ -1135,6 +1145,7 @@ export namespace Prisma {
   export type BookingSelectScalar = {
     id?: boolean
     tripType?: boolean
+    carType?: boolean
     pickupPlace?: boolean
     dropPlace?: boolean
     date?: boolean
@@ -1145,7 +1156,7 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type BookingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tripType" | "pickupPlace" | "dropPlace" | "date" | "time" | "customerName" | "customerPhone" | "status" | "createdAt", ExtArgs["result"]["booking"]>
+  export type BookingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tripType" | "carType" | "pickupPlace" | "dropPlace" | "date" | "time" | "customerName" | "customerPhone" | "status" | "createdAt", ExtArgs["result"]["booking"]>
 
   export type $BookingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Booking"
@@ -1153,6 +1164,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       tripType: string
+      carType: string
       pickupPlace: string
       dropPlace: string
       date: string
@@ -1586,6 +1598,7 @@ export namespace Prisma {
   interface BookingFieldRefs {
     readonly id: FieldRef<"Booking", 'Int'>
     readonly tripType: FieldRef<"Booking", 'String'>
+    readonly carType: FieldRef<"Booking", 'String'>
     readonly pickupPlace: FieldRef<"Booking", 'String'>
     readonly dropPlace: FieldRef<"Booking", 'String'>
     readonly date: FieldRef<"Booking", 'String'>
@@ -1982,6 +1995,7 @@ export namespace Prisma {
   export const BookingScalarFieldEnum: {
     id: 'id',
     tripType: 'tripType',
+    carType: 'carType',
     pickupPlace: 'pickupPlace',
     dropPlace: 'dropPlace',
     date: 'date',
@@ -2081,6 +2095,7 @@ export namespace Prisma {
     NOT?: BookingWhereInput | BookingWhereInput[]
     id?: IntFilter<"Booking"> | number
     tripType?: StringFilter<"Booking"> | string
+    carType?: StringFilter<"Booking"> | string
     pickupPlace?: StringFilter<"Booking"> | string
     dropPlace?: StringFilter<"Booking"> | string
     date?: StringFilter<"Booking"> | string
@@ -2094,6 +2109,7 @@ export namespace Prisma {
   export type BookingOrderByWithRelationInput = {
     id?: SortOrder
     tripType?: SortOrder
+    carType?: SortOrder
     pickupPlace?: SortOrder
     dropPlace?: SortOrder
     date?: SortOrder
@@ -2110,6 +2126,7 @@ export namespace Prisma {
     OR?: BookingWhereInput[]
     NOT?: BookingWhereInput | BookingWhereInput[]
     tripType?: StringFilter<"Booking"> | string
+    carType?: StringFilter<"Booking"> | string
     pickupPlace?: StringFilter<"Booking"> | string
     dropPlace?: StringFilter<"Booking"> | string
     date?: StringFilter<"Booking"> | string
@@ -2123,6 +2140,7 @@ export namespace Prisma {
   export type BookingOrderByWithAggregationInput = {
     id?: SortOrder
     tripType?: SortOrder
+    carType?: SortOrder
     pickupPlace?: SortOrder
     dropPlace?: SortOrder
     date?: SortOrder
@@ -2144,6 +2162,7 @@ export namespace Prisma {
     NOT?: BookingScalarWhereWithAggregatesInput | BookingScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Booking"> | number
     tripType?: StringWithAggregatesFilter<"Booking"> | string
+    carType?: StringWithAggregatesFilter<"Booking"> | string
     pickupPlace?: StringWithAggregatesFilter<"Booking"> | string
     dropPlace?: StringWithAggregatesFilter<"Booking"> | string
     date?: StringWithAggregatesFilter<"Booking"> | string
@@ -2156,6 +2175,7 @@ export namespace Prisma {
 
   export type BookingCreateInput = {
     tripType: string
+    carType: string
     pickupPlace: string
     dropPlace: string
     date: string
@@ -2169,6 +2189,7 @@ export namespace Prisma {
   export type BookingUncheckedCreateInput = {
     id?: number
     tripType: string
+    carType: string
     pickupPlace: string
     dropPlace: string
     date: string
@@ -2181,6 +2202,7 @@ export namespace Prisma {
 
   export type BookingUpdateInput = {
     tripType?: StringFieldUpdateOperationsInput | string
+    carType?: StringFieldUpdateOperationsInput | string
     pickupPlace?: StringFieldUpdateOperationsInput | string
     dropPlace?: StringFieldUpdateOperationsInput | string
     date?: StringFieldUpdateOperationsInput | string
@@ -2194,6 +2216,7 @@ export namespace Prisma {
   export type BookingUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     tripType?: StringFieldUpdateOperationsInput | string
+    carType?: StringFieldUpdateOperationsInput | string
     pickupPlace?: StringFieldUpdateOperationsInput | string
     dropPlace?: StringFieldUpdateOperationsInput | string
     date?: StringFieldUpdateOperationsInput | string
@@ -2207,6 +2230,7 @@ export namespace Prisma {
   export type BookingCreateManyInput = {
     id?: number
     tripType: string
+    carType: string
     pickupPlace: string
     dropPlace: string
     date: string
@@ -2219,6 +2243,7 @@ export namespace Prisma {
 
   export type BookingUpdateManyMutationInput = {
     tripType?: StringFieldUpdateOperationsInput | string
+    carType?: StringFieldUpdateOperationsInput | string
     pickupPlace?: StringFieldUpdateOperationsInput | string
     dropPlace?: StringFieldUpdateOperationsInput | string
     date?: StringFieldUpdateOperationsInput | string
@@ -2232,6 +2257,7 @@ export namespace Prisma {
   export type BookingUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     tripType?: StringFieldUpdateOperationsInput | string
+    carType?: StringFieldUpdateOperationsInput | string
     pickupPlace?: StringFieldUpdateOperationsInput | string
     dropPlace?: StringFieldUpdateOperationsInput | string
     date?: StringFieldUpdateOperationsInput | string
@@ -2282,6 +2308,7 @@ export namespace Prisma {
   export type BookingCountOrderByAggregateInput = {
     id?: SortOrder
     tripType?: SortOrder
+    carType?: SortOrder
     pickupPlace?: SortOrder
     dropPlace?: SortOrder
     date?: SortOrder
@@ -2299,6 +2326,7 @@ export namespace Prisma {
   export type BookingMaxOrderByAggregateInput = {
     id?: SortOrder
     tripType?: SortOrder
+    carType?: SortOrder
     pickupPlace?: SortOrder
     dropPlace?: SortOrder
     date?: SortOrder
@@ -2312,6 +2340,7 @@ export namespace Prisma {
   export type BookingMinOrderByAggregateInput = {
     id?: SortOrder
     tripType?: SortOrder
+    carType?: SortOrder
     pickupPlace?: SortOrder
     dropPlace?: SortOrder
     date?: SortOrder

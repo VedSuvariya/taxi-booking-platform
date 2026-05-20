@@ -123,6 +123,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.BookingScalarFieldEnum = {
   id: 'id',
   tripType: 'tripType',
+  carType: 'carType',
   pickupPlace: 'pickupPlace',
   dropPlace: 'dropPlace',
   date: 'date',

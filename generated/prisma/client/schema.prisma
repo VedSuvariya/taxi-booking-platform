@@ -11,6 +11,7 @@ datasource db {
 model Booking {
   id            Int      @id @default(autoincrement())
   tripType      String
+  carType       String
   pickupPlace   String
   dropPlace     String
   date          String
